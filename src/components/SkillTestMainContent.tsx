@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button } from './ui/button'
 import { SiHtml5 } from "react-icons/si";
 import { BsFilterSquareFill } from "react-icons/bs";
@@ -7,6 +7,7 @@ import { BsTrophyFill } from "react-icons/bs";
 import { BsCheckSquareFill } from "react-icons/bs";
 import { Graph } from './Graph';
 import SkillAnalysisDialogbox from './SkillAnalysisDialogbox';
+import { SkillContext } from '@/context/SkillSummaryProvider';
 
 
 
@@ -38,16 +39,10 @@ const statistics = [
 
 
 
+const SkillTestMainContent = () => {
+    const { rank, score, percentile } = useContext(SkillContext)
 
 
-
-const SkillTestMainContent = ({ rank, percentile, score }) => {
-
-    if (rank == undefined || percentile == undefined || score == undefined) {
-        rank = 4;
-        percentile = 90
-        score = 12
-    }
     return (
         // <div className={`page-content ${isModalOpen ? 'modal-open' : ''}`} >
         <div>

@@ -19,6 +19,8 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
+import { useContext } from "react";
+import { SkillContext } from "@/context/SkillSummaryProvider";
 const chartData = [
     { browser: "safari", visitors: 0, fill: "var(--color-safari)" },
 ]
@@ -33,7 +35,10 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
+
 export function PieChart() {
+    const { score } = useContext(SkillContext)
+    console.log(score)
     return (
         <Card className="flex flex-col">
 
@@ -44,7 +49,7 @@ export function PieChart() {
                 >
                     <RadialBarChart
                         data={chartData}
-                        endAngle={100}
+                        endAngle={score / 15 * 360}
                         innerRadius={80}
                         outerRadius={140}
                     >
@@ -67,7 +72,14 @@ export function PieChart() {
                                                 textAnchor="middle"
                                                 dominantBaseline="middle"
                                             >
-                                                <BsBullseye />
+                                                <tspan
+                                                    x={viewBox.cx}
+                                                    y={viewBox.cy}
+                                                    className="fill-blue-500 text-4xl font-bold"
+                                                >
+                                                    <BsBullseye />
+                                                </tspan>
+
                                             </text>
                                         )
                                     }

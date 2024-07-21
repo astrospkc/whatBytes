@@ -1,13 +1,11 @@
 "use client"
-import React from 'react'
+import React, { useContext } from 'react'
 import { PieChart } from './PieChart'
+import { SkillContext } from '@/context/SkillSummaryProvider'
 
-const QuestionAnalysis = ({ score }) => {
+const QuestionAnalysis = () => {
 
-    if (score == undefined) {
-
-        score = 12
-    }
+    const { score } = useContext(SkillContext)
 
     return (
         <div>
@@ -16,7 +14,9 @@ const QuestionAnalysis = ({ score }) => {
                 <p>
                     <span className='font-semibold'>You scores {score} question correct out of 15.</span> However it will needs some improvements
                 </p>
-                <PieChart score={score} />
+                {/* <PieChart score={score} />
+                 */}
+                <PieChart />
             </div>
 
         </div>

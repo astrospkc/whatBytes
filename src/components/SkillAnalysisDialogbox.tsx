@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import {
     Dialog,
     DialogContent,
@@ -8,17 +8,26 @@ import {
     DialogTrigger,
     DialogClose,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+
 import { SiHtml5 } from "react-icons/si";
 import { Button } from './ui/button';
-import SkillTestMainContent from './SkillTestMainContent';
-import QuestionAnalysis from './QuestionAnalysis';
+
+import { SkillContext } from '@/context/SkillSummaryProvider';
 
 const SkillAnalysisDialogbox = () => {
-    const [rank, setRank] = useState('');
-    const [percentile, setPercentile] = useState('');
-    const [score, setScore] = useState('');
+    const { rank, changeRank, percentile, changePercentile, score, changeScore } = useContext(SkillContext)
 
+
+
+    const handleRankChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        changeRank(event.target.value);
+    };
+    const handlePercentileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        changePercentile(event.target.value);
+    };
+    const handleScoreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        changeScore(event.target.value);
+    };
     // Function to handle form submission
     const handleSubmit = (event: any) => {
         event.preventDefault();
@@ -51,7 +60,7 @@ const SkillAnalysisDialogbox = () => {
                                         type="text"
                                         className="rounded-2xl border-gray-300 border-2"
                                         value={rank}
-                                        onChange={(e) => setRank(e.target.value)}
+                                        onChange={handleRankChange}
                                     />
                                 </div>
                                 <div className='flex flex-row justify-around'>
@@ -63,7 +72,7 @@ const SkillAnalysisDialogbox = () => {
                                         type="text"
                                         className="rounded-2xl border-gray-300 border-2"
                                         value={percentile}
-                                        onChange={(e) => setPercentile(e.target.value)}
+                                        onChange={handlePercentileChange}
                                     />
                                 </div>
                                 <div className='flex flex-row justify-around'>
@@ -75,7 +84,7 @@ const SkillAnalysisDialogbox = () => {
                                         type="text"
                                         className="rounded-2xl border-gray-300 border-2"
                                         value={score}
-                                        onChange={(e) => setScore(e.target.value)}
+                                        onChange={handleScoreChange}
                                     />
                                 </div>
                                 <DialogFooter className="sm:justify-start flex flex-row gap-2">
@@ -96,8 +105,15 @@ const SkillAnalysisDialogbox = () => {
                     </div>
                 </DialogContent>
             </Dialog>
-            <SkillTestMainContent rank={rank} percentile={percentile} score={score} />
-            <QuestionAnalysis score={score} />
+            {/* {
+                rank && percentile && score &&
+                <SkillTestMainContent rank={rank} percentile={percentile} score={score} />
+
+            }
+            [
+            rank && percentile && score && <Dashboard rank={rank} percentile={percentile} score={score} />
+            ] */}
+            {/* <QuestionAnalysis score={score} /> */}
         </div>
     );
 };

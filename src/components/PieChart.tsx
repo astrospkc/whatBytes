@@ -49,7 +49,7 @@ export function PieChart() {
                 >
                     <RadialBarChart
                         data={chartData}
-                        endAngle={score / 15 * 360}
+                        endAngle={parseInt(score) / 15 * 360}
                         innerRadius={80}
                         outerRadius={140}
                     >

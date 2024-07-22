@@ -5,12 +5,15 @@ import { createContext, useState, Dispatch, SetStateAction } from 'react'
 interface SkillContextType {
     rank: string;
     setRank: (rank: string) => void;
-    precentile: string;
+    percentile: string;
     setPercentile: (percentile: string) => void;
     score: string;
     setScore: (score: string) => void;
+    changeRank: (rank: string) => void;
+    changePercentile: (percentile: string) => void;
+    changeScore: (score: string) => void;
 }
-const SkillContext = createContext<SkillContextType>();
+const SkillContext = createContext<SkillContextType | undefined>(undefined);
 
 function SkillSummaryProvider({ children }: { children: React.ReactNode }) {
     const [rank, setRank] = useState<string>('4');
@@ -28,7 +31,7 @@ function SkillSummaryProvider({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <SkillContext.Provider value={{ rank, changeRank, percentile, changePercentile, score, changeScore }}>
+        <SkillContext.Provider value={{ rank, changeRank, percentile, changePercentile, setPercentile, setRank, setScore, score, changeScore }}>
             {children}
         </SkillContext.Provider>
     )

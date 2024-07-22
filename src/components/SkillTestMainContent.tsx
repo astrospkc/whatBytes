@@ -40,7 +40,12 @@ const statistics = [
 
 
 const SkillTestMainContent = () => {
-    const { rank, score, percentile } = useContext(SkillContext)
+    const context = useContext(SkillContext);
+
+    // Type guard to check if context is defined
+    if (!context) {
+        throw new Error("SomeComponent must be used within a SkillSummaryProvider");
+    } const { rank, percentile, score } = context;
 
 
     return (

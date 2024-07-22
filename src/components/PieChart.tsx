@@ -37,7 +37,14 @@ const chartConfig = {
 
 
 export function PieChart() {
-    const { score } = useContext(SkillContext)
+    const context = useContext(SkillContext);
+
+    // Type guard to check if context is defined
+    if (!context) {
+        throw new Error("SomeComponent must be used within a SkillSummaryProvider");
+    }
+
+    const { score } = context
     // console.log(score)
     return (
         <Card className="flex flex-col">
@@ -57,7 +64,7 @@ export function PieChart() {
                             gridType="circle"
                             radialLines={false}
                             stroke="none"
-                            className="first:fill-blue last:fill-background"
+                            className="first:fill-muted last:fill-background"
                             polarRadius={[86, 74]}
                         />
                         <RadialBar dataKey="visitors" background />
